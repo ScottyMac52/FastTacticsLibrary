@@ -105,7 +105,7 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(1.0F, 0.0F);
-			PolarCoordinate expected = PolarCoordinate(90.000F, 1.000F);
+			PolarCoordinate expected = PolarCoordinate(EAST, 1.000F);
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
@@ -209,7 +209,7 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(0.0F, -1.0F);
-			PolarCoordinate expected = PolarCoordinate(180.000F, 1.000F);
+			PolarCoordinate expected = PolarCoordinate(SOUTH, 1.000F);
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
@@ -313,7 +313,7 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(-1.0F, -0.0F);
-			PolarCoordinate expected = PolarCoordinate(270.000F, 1.000F);
+			PolarCoordinate expected = PolarCoordinate(WEST, 1.000F);
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
@@ -417,7 +417,7 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(-0.00000F, 1.000000F);
-			PolarCoordinate expected = PolarCoordinate(360.0000F, 1.00000F);
+			PolarCoordinate expected = PolarCoordinate(NORTH, 1.00000F);
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
