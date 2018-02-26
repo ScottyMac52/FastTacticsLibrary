@@ -1,12 +1,17 @@
 #pragma once
 #include "globals.h"
+#include <iostream> 
+#include <string> 
+#include <sstream> 
+#include <iomanip>
+#include "ClassShower.h"
 
-class DllExport PolarCoordinate
+class DllExport PolarCoordinate :
+	protected ClassShower
 {
-private:
+protected:
 	float _degrees;
 	float _range;
-
 public:
 	PolarCoordinate();
 	PolarCoordinate(float, float);
@@ -19,6 +24,7 @@ public:
 	bool operator == (const PolarCoordinate &Ref) const;
 	PolarCoordinate operator -= (const PolarCoordinate &Ref) const;
 	PolarCoordinate operator += (const PolarCoordinate &Ref) const;
+	std::wstring toString(int rounding_digits) const override;
 
 };
 

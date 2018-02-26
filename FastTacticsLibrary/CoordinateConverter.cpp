@@ -1,7 +1,10 @@
 #include "stdafx.h"
+#include <iostream>     // std::cout, std::fixed
+#include <iomanip>      // std::setprecision
 #include "CoordinateConverter.h"
+#include "globals.h"
 
-#define FLOAT_PI (float) roundf(M_PI)
+using namespace std;
 
 //************************************
 // Method:    ConvertFromRelativeToAbsolute
@@ -42,7 +45,7 @@ TwoDCoordinate CoordinateConverter::ConvertFromAbsoluteToRelative(TwoDCoordinate
 // Parameter: PolarCoordinate source
 // Parameter: TwoDCoordinate offSet
 //************************************
-TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(PolarCoordinate source, TwoDCoordinate offSet = TwoDCoordinate(0, 0))
+TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(PolarCoordinate source, TwoDCoordinate offSet)
 {
 	float newX, newY, degrees, range;
 
@@ -82,11 +85,7 @@ TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(PolarCoordinate source,
 	// Y is radius * Sin(theta in radians)
 	newY = range * sin(radians);
 
-	// Apply the Offset
-	newX = offSet.getX() + newX;
-	newY = offSet.getY() + newY;
-
-	return TwoDCoordinate(newX, newY);
+	return TwoDCoordinate(newX, newY) += offSet;
 }
 
 //************************************
@@ -99,11 +98,62 @@ TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(PolarCoordinate source,
 //************************************
 PolarCoordinate CoordinateConverter::ConvertFrom2DToPolar(TwoDCoordinate source)
 {
-	return PolarCoordinate();
+	float sine = 0.00, cos = 0.00, tan = 0.00;
+	// Calculate the z
+	float z = sqrt(Square(source.getX()) + Square(source.getY()));
+	float angleTheta = NORTH;
+	// Get the sine, cos and tan
+	sine = source.getY() / z;
+	cos = source.getX() / z;
+	tan = source.getY() / source.getX();
+
+	if (isnan(sine) && isnan(cos) && isnan(tan))
+	{
+		angleTheta = NORTH_PRIME;
+	}
+	else if (IsZero(sine) && cos == -1.00 && IsZero(tan))
+	{
+		angleTheta = WEST;
+	}
+	else if (IsZero(sine) && cos == 1.00 && IsZero(tan))
+	{
+		angleTheta = EAST;
+	}
+	else if (!IsNegative(sine) && !IsNegative(cos) && !IsNegative(tan))
+	{
+		// Quadrant One 
+		angleTheta = EAST - RadiansToDegrees(atan(source.getY() / source.getX()));
+	}
+	else if (!IsNegative(sine) && IsNegative(cos) && IsNegative(tan))
+	{
+		// Quadrant Two 
+		angleTheta = WEST + RadiansToDegrees(asin(source.getY() / z));
+	}
+	else if (IsNegative(sine) && IsNegative(cos) && !IsNegative(tan))
+	{
+		// Quadrant Three
+		angleTheta = WEST - RadiansToDegrees(atan(source.getY() / source.getX()));
+	}
+	else if (IsNegative(sine) && !IsNegative(cos) && IsNegative(tan))
+	{
+		// Quadrant Four
+		angleTheta = EAST + abs(RadiansToDegrees(atan(source.getY() / source.getX())));
+	}
+	else if (isnan(tan) && !isnan(sine) && !isnan(cos))
+	{
+		if (sine == 1.00F && IsZero(cos))
+		{
+			angleTheta = NORTH;
+		}
+		else if (sine == -1.00F && IsZero(cos))
+		{
+			angleTheta = SOUTH;
+		}
+	}
+
+	return PolarCoordinate(angleTheta, z);
 }
 
-#pragma warning( push )
-#pragma warning( disable : 4305)
 //************************************
 // Method:    DegreesToRadians
 // FullName:  CoordinateConverter::DegreesToRadians
@@ -129,4 +179,4 @@ float CoordinateConverter::RadiansToDegrees(float radians)
 {
 	return radians * (180.00F / FLOAT_PI);
 }
-#pragma warning( pop ) 
+

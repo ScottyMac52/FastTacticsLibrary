@@ -12,9 +12,9 @@
  * \note
 */
 #include "stdafx.h"
+#include "globals.h"
 #include "TwoDCoordinate.h"
 
-#define Square(a) (float) (a * a)
 
 //************************************
 // Method:    TwoDCoordinate
@@ -196,9 +196,11 @@ bool TwoDCoordinate::operator==(const TwoDCoordinate &Ref) const
 // Qualifier: const
 // Parameter: const TwoDCoordinate & Ref
 //************************************
-TwoDCoordinate TwoDCoordinate::operator-=(const TwoDCoordinate & Ref) const
+TwoDCoordinate& TwoDCoordinate::operator-=(const TwoDCoordinate & Ref)
 {
-	return TwoDCoordinate(_x - Ref.getX(), _y - Ref.getY());
+	this->_x -= Ref.getX();
+	this->_y -= Ref.getY();
+	return *this;
 }
 
 //************************************
@@ -209,9 +211,23 @@ TwoDCoordinate TwoDCoordinate::operator-=(const TwoDCoordinate & Ref) const
 // Qualifier: const
 // Parameter: const TwoDCoordinate & Ref
 //************************************
-TwoDCoordinate TwoDCoordinate::operator+=(const TwoDCoordinate & Ref) const
+TwoDCoordinate& TwoDCoordinate::operator+=(const TwoDCoordinate & Ref) 
 {
-	return TwoDCoordinate(_x + Ref.getX(), _y + Ref.getY());
+	this->_x += Ref.getX();
+	this->_y += Ref.getY();
+	return *this;
+}
+
+std::wstring TwoDCoordinate::toString(int rounding_digits) const
+{
+	std::wostringstream oss;
+	oss << std::fixed << std::showpoint;
+	oss << std::setprecision(rounding_digits);
+	oss << _x;
+	oss << ", ";
+	oss << _y;
+	std::wstring buffer = oss.str();
+	return buffer;
 }
 
 TwoDCoordinate::~TwoDCoordinate()

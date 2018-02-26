@@ -1,13 +1,15 @@
 #pragma once
-
-#define GET_DISTANCE(secondPoint) firstPoint.getDistance(secondPoint) 
-#define ASSERT_DISTANCE(first, second) AssertOnActualNotEqualToExpected(first, second)
+#include "..\FastTacticsLibrary\PolarCoordinate.h"
+#include "..\FastTacticsLibrary\TwoDCoordinate.h"
 
 class BaseTester
 {
 protected:
+	void AssertOnActualNotEqualToExpected(std::wstring, std::wstring);
+	void AssertOnActualEqualToExpected(std::wstring expected, std::wstring actual);
 	void AssertOnActualNotEqualToExpected(float, float);
-	std::wstring BaseTester::GetAssertError(float, float) const;
+	std::wstring GetAssertError(std::wstring, std::wstring) const;
+	std::wstring GetAssertError(float, float) const;
 public:
 	BaseTester();
 	~BaseTester();

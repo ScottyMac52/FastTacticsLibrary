@@ -93,7 +93,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,7 +107,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClassShower.h" />
     <ClInclude Include="CoordinateConverter.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="PolarCoordinate.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="TwoDCoordinate.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClassShower.cpp" />
     <ClCompile Include="CoordinateConverter.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="FastTacticsLibrary.cpp" />
@@ -168,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="ThreeDCoordinate.cpp" />
     <ClCompile Include="TwoDCoordinate.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FastTacticsLibrary.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

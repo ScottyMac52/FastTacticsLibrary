@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "..\FastTacticsLibrary\PolarCoordinate.h"
+#include "globals.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -8,6 +9,7 @@ namespace Tacticstests
 {
 	TEST_CLASS(PolarCoordinateTests)
 	{
+		TEST_CATEGORY(TestOperatorEqual, L"Operator Tests - PolarCoordinate")
 		TEST_METHOD(TestOperatorEqual)
 		{
 			// ARRANGE
@@ -21,6 +23,7 @@ namespace Tacticstests
 			Assert::IsTrue(areEqual);
 		}
 
+		TEST_CATEGORY(TestOperatorNotEqual, L"Operator Tests - PolarCoordinate")
 		TEST_METHOD(TestOperatorNotEqual)
 		{
 
@@ -34,6 +37,7 @@ namespace Tacticstests
 			Assert::IsFalse(areEqual);
 		}
 
+		TEST_CATEGORY(TestOperatorPlusEqualForRange, L"Operator Tests - PolarCoordinate")
 		TEST_METHOD(TestOperatorPlusEqualForRange)
 		{
 			// ARRANGE
@@ -48,6 +52,7 @@ namespace Tacticstests
 			Assert::IsTrue(expected == actual);
 		}
 
+		TEST_CATEGORY(TestOperatorMinusEqualForRange, L"Operator Tests - PolarCoordinate")
 		TEST_METHOD(TestOperatorMinusEqualForRange)
 		{
 			// ARRANGE
@@ -62,6 +67,7 @@ namespace Tacticstests
 			Assert::IsTrue(expected == actual);
 		}
 
+		TEST_CATEGORY(TestOperatorPlusEqualForDegrees, L"Operator Tests - PolarCoordinate")
 		TEST_METHOD(TestOperatorPlusEqualForDegrees)
 		{
 			// ARRANGE
@@ -76,6 +82,7 @@ namespace Tacticstests
 			Assert::IsTrue(expected == actual);
 		}
 
+		TEST_CATEGORY(TestOperatorMinusEqualForDegrees, L"Operator Tests - PolarCoordinate")
 		TEST_METHOD(TestOperatorMinusEqualForDegrees)
 		{
 			// ARRANGE

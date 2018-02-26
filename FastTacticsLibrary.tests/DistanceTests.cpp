@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "globals.h"
 #include "..\FastTacticsLibrary\TwoDCoordinate.h"
 #include "BaseTester.h"
 
@@ -11,6 +12,7 @@ namespace Tacticstests
 	{
 	public:
 		
+		TEST_CATEGORY(TestToEnsureThatPosition34ResultsInDistanceOf5, L"Distance")
 		TEST_METHOD(TestToEnsureThatPosition34ResultsInDistanceOf5)
 		{
 			// ARRANGE
@@ -25,6 +27,7 @@ namespace Tacticstests
 			ASSERT_DISTANCE(expected, distance);
 		}
 
+		TEST_CATEGORY(TestToEnsureThatPositionNeg3Neg4ResultsInDistanceOf5, L"Distance")
 		TEST_METHOD(TestToEnsureThatPositionNeg3Neg4ResultsInDistanceOf5)
 		{
 			// ARRANGE
@@ -40,6 +43,7 @@ namespace Tacticstests
 		}
 
 
+		TEST_CATEGORY(TestToEnsureThatPosition0ResultsInDistanceOf0, L"Distance")
 		TEST_METHOD(TestToEnsureThatPosition0ResultsInDistanceOf0)
 		{
 			// ARRANGE
@@ -54,6 +58,7 @@ namespace Tacticstests
 			ASSERT_DISTANCE(expected, distance);
 		}
 
+		TEST_CATEGORY(TestToEnsureThatPosition11ResultsInDistanceOf1Point41421354, L"Distance")
 		TEST_METHOD(TestToEnsureThatPosition11ResultsInDistanceOf1Point41421354)
 		{
 			// ARRANGE
@@ -68,6 +73,7 @@ namespace Tacticstests
 			ASSERT_DISTANCE(expected, distance);
 		}
 
+		TEST_CATEGORY(TestToEnsureThatPositionNeg1Neg1ResultsInDistanceOf1Point41421354, L"Distance")
 		TEST_METHOD(TestToEnsureThatPositionNeg1Neg1ResultsInDistanceOf1Point41421354)
 		{
 			// ARRANGE
@@ -82,7 +88,8 @@ namespace Tacticstests
 			ASSERT_DISTANCE(expected, distance);
 		}
 
-		TEST_METHOD(TestToEnsureDistanceOf1Is707OnBothSides)
+		TEST_CATEGORY(TestToEnsureDistanceOf1Is7_07OnBothSides, L"Distance")
+		TEST_METHOD(TestToEnsureDistanceOf1Is7_07OnBothSides)
 		{
 			// ARRANGE
 			TwoDCoordinate firstPoint = TwoDCoordinate(0, 0);
@@ -96,6 +103,7 @@ namespace Tacticstests
 			ASSERT_DISTANCE(expected, distance);
 		}
 
+		TEST_CATEGORY(TestToEnsureDistanceOf10Is7_07OnBothSides, L"Distance")
 		TEST_METHOD(TestToEnsureDistanceOf10Is7_07OnBothSides)
 		{
 			// ARRANGE

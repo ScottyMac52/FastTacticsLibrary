@@ -144,6 +144,27 @@ PolarCoordinate PolarCoordinate::operator+=(const PolarCoordinate & Ref) const
 	return PolarCoordinate(_degrees + Ref.getDegrees(), _range + Ref.getRange());
 }
 
+//************************************
+// Method:    toString
+// FullName:  PolarCoordinate::toString
+// Access:    virtual public 
+// Returns:   std::wstring
+// Qualifier:
+// Parameter: int rounding_digits
+//************************************
+std::wstring PolarCoordinate::toString(int rounding_digits) const
+{
+	std::wostringstream oss;
+	oss << std::fixed << std::showpoint;
+	oss << std::setprecision(rounding_digits);
+	oss << _degrees;
+	oss << "° at ";
+	oss << _range;
+	oss << " units";
+	std::wstring buffer = oss.str();
+	return buffer;
+}
+
 PolarCoordinate::~PolarCoordinate()
 {
 }

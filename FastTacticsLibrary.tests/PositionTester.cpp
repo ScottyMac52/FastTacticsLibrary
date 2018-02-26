@@ -1,20 +1,24 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
+#include "globals.h"
 #include "..\FastTacticsLibrary\TwoDCoordinate.h"
+#include "BaseTester.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-#define HALF(x) (float) x / 2.00F
-
 namespace Tacticstests
 {
-	TEST_CLASS(PositionTester)
+	TEST_CLASS(PositionTester), public BaseTester
 	{
 	private:
-		const float MaxX = 300.00F;
-		const float MaxY = 300.00F;
+		const float MaxX = 600.00F;
+		const float MaxY = 600.00F;
+		const int ROUNDING_DIGITS = MAX_FLOAT_DIGITS;
 	public:
 
+#pragma region PositionTester for TwoDCoordinate 
+
+		TEST_CATEGORY(TestToEnsure00RelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
 		TEST_METHOD(TestToEnsure00RelativeIsCorrectInAbs)
 		{
 			// ARRANGE
@@ -25,9 +29,10 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			Assert::IsTrue(actual == expected, L"Wrong answer!");
+			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
 		}
 
+		TEST_CATEGORY(TestToEnsureMaxXRelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
 		TEST_METHOD(TestToEnsureMaxXRelativeIsCorrectInAbs)
 		{
 			// ARRANGE
@@ -38,9 +43,10 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			Assert::IsTrue(actual == expected);
+			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
 		}
 
+		TEST_CATEGORY(TestToEnsureMaxYRelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
 		TEST_METHOD(TestToEnsureMaxYRelativeIsCorrectInAbs)
 		{
 			// ARRANGE
@@ -51,9 +57,10 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			Assert::IsTrue(actual == expected);
+			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
 		}
 
+		TEST_CATEGORY(TestToEnsureMaxNegYRelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
 		TEST_METHOD(TestToEnsureMaxNegYRelativeIsCorrectInAbs)
 		{
 			// ARRANGE
@@ -64,9 +71,9 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			Assert::IsTrue(actual == expected);
+			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
 		}
-
+#pragma endregion PositionTester for TwoDCoordinate 
 
 	};
 }

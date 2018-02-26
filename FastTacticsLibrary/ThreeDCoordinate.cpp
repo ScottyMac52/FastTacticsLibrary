@@ -23,8 +23,8 @@ ThreeDCoordinate::ThreeDCoordinate()
 //************************************
 ThreeDCoordinate::ThreeDCoordinate(PolarCoordinate position, float const altitude)
 {
-	setDegrees(position.getDegrees());
-	setRange(position.getRange());
+	_degrees = position.getDegrees();
+	_range = position.getRange();
 	_altitude = altitude;
 }
 
@@ -38,9 +38,9 @@ ThreeDCoordinate::ThreeDCoordinate(PolarCoordinate position, float const altitud
 //************************************
 ThreeDCoordinate::ThreeDCoordinate(ThreeDCoordinate const & obj)
 {
-	setDegrees(obj.getDegrees());
-	setRange(obj.getRange());
-	_altitude = obj.getAltitude();
+	_degrees = obj._degrees;
+	_range = obj._range;
+	_altitude = obj._altitude;
 }
 
 //************************************
@@ -115,9 +115,12 @@ bool ThreeDCoordinate::operator==(const ThreeDCoordinate & Ref) const
 // Qualifier: const
 // Parameter: const ThreeDCoordinate & Ref
 //************************************
-ThreeDCoordinate ThreeDCoordinate::operator-=(const ThreeDCoordinate & Ref) const
+ThreeDCoordinate& ThreeDCoordinate::operator-=(const ThreeDCoordinate & Ref)
 {
-	return ThreeDCoordinate(PolarCoordinate(getDegrees() - Ref.getDegrees(), getRange() - Ref.getRange()), _altitude - Ref.getAltitude());
+	_degrees -= Ref._degrees;
+	_range -= Ref._range;
+	_altitude -= Ref._altitude;
+	return *this;
 }
 
 //************************************
@@ -128,9 +131,66 @@ ThreeDCoordinate ThreeDCoordinate::operator-=(const ThreeDCoordinate & Ref) cons
 // Qualifier: const
 // Parameter: const ThreeDCoordinate & Ref
 //************************************
-ThreeDCoordinate ThreeDCoordinate::operator+=(const ThreeDCoordinate & Ref) const
+ThreeDCoordinate& ThreeDCoordinate::operator+=(const ThreeDCoordinate & Ref)
 {
-	return ThreeDCoordinate(PolarCoordinate(getDegrees() + Ref.getDegrees(), getRange() + Ref.getRange()), _altitude + Ref.getAltitude());
+	_degrees += Ref._degrees;
+	_range += Ref._range;
+	_altitude += Ref._altitude;
+	return *this;
+}
+
+//************************************
+// Method:    toString
+// FullName:  ThreeDCoordinate::toString
+// Access:    virtual public 
+// Returns:   std::wstring
+// Qualifier:
+// Parameter: int rounding_digits
+//************************************
+std::wstring ThreeDCoordinate::toString(int rounding_digits) const
+{
+	std::wostringstream oss;
+	oss << std::fixed << std::showpoint;
+	oss << std::setprecision(rounding_digits);
+	oss << getPolarCoordinate().toString(rounding_digits);
+	oss << " -> ";
+	oss << getAngels();
+	std::wstring buffer = oss.str();
+	return buffer;
+}
+
+//************************************
+// Method:    getAngels
+// FullName:  ThreeDCoordinate::getAngels
+// Access:    public 
+// Returns:   std::wstring
+// Qualifier:
+//************************************
+std::wstring ThreeDCoordinate::getAngels() const
+{
+	std::wostringstream oss;
+	std::wostringstream angels_out;
+	angels_out << std::fixed << std::showpoint;
+	oss << std::fixed << std::showpoint;
+	oss << (int) _altitude;
+	std::wstring buffer = oss.str();
+	int length = buffer.length();
+
+	angels_out << "Angels ";
+	switch (length)
+	{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			angels_out << 0;
+			break;
+		default:
+			angels_out << buffer.substr(0, length - 3);
+			break;
+	}
+	
+	return angels_out.str();
 }
 
 ThreeDCoordinate::~ThreeDCoordinate()

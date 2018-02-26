@@ -1,7 +1,9 @@
 #pragma once
 #include "globals.h"
+#include "ClassShower.h"
 
-class DllExport TwoDCoordinate
+class DllExport TwoDCoordinate :
+	protected ClassShower
 {
 private:
 	float _x;
@@ -18,7 +20,8 @@ public:
 	TwoDCoordinate getRelativePosition(float, float);
 	float getDistance(TwoDCoordinate);
 	bool operator == (const TwoDCoordinate &Ref) const;
-	TwoDCoordinate operator -= (const TwoDCoordinate &Ref) const;
-	TwoDCoordinate operator += (const TwoDCoordinate &Ref) const;
+	TwoDCoordinate& operator-=(const TwoDCoordinate &Ref);
+	TwoDCoordinate& operator+=(const TwoDCoordinate & Ref);
+	virtual std::wstring toString(int rounding_digits) const override;
 	~TwoDCoordinate();
 };
