@@ -134,6 +134,19 @@ TwoDCoordinate TwoDCoordinate::getAbsolutePosition(float sizeX, float sizeY)
 }
 
 //************************************
+// Method:    getAbsolutePosition
+// FullName:  TwoDCoordinate::getAbsolutePosition
+// Access:    public 
+// Returns:   TwoDCoordinate
+// Qualifier:
+// Parameter: TwoDCoordinate * size
+//************************************
+TwoDCoordinate TwoDCoordinate::getAbsolutePosition(TwoDCoordinate *size)
+{
+	return getAbsolutePosition(size->getX(), size->getY());
+}
+
+//************************************
 // Method:    getRelativePosition
 // FullName:  TwoDCoordinate::getRelativePosition
 // Access:    public 
@@ -158,6 +171,19 @@ TwoDCoordinate TwoDCoordinate::getRelativePosition(float sizeX, float sizeY)
 	}
 	newY = midY - _y;
 	return TwoDCoordinate(newX, newY);
+}
+
+//************************************
+// Method:    getRelativePosition
+// FullName:  TwoDCoordinate::getRelativePosition
+// Access:    public 
+// Returns:   TwoDCoordinate
+// Qualifier:
+// Parameter: TwoDCoordinate * size
+//************************************
+TwoDCoordinate TwoDCoordinate::getRelativePosition(TwoDCoordinate *size)
+{
+	return getRelativePosition(size->getX(), size->getY());
 }
 
 //************************************

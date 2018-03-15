@@ -17,7 +17,9 @@ public:
 	float getX() const;
 	float getY() const;
 	TwoDCoordinate getAbsolutePosition(float, float);
+	TwoDCoordinate getAbsolutePosition(TwoDCoordinate *);
 	TwoDCoordinate getRelativePosition(float, float);
+	TwoDCoordinate getRelativePosition(TwoDCoordinate *);
 	float getDistance(TwoDCoordinate);
 	bool operator == (const TwoDCoordinate &Ref) const;
 	TwoDCoordinate& operator-=(const TwoDCoordinate &Ref);
