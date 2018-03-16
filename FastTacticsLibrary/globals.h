@@ -15,3 +15,5 @@
 #define IsNegative(x) (bool) (x < 0.00F)
 #define IsZero(x) (bool) (x == 0.00F)
 
+enum ContactPersonality { Unknown, Friendly, Enemy };
+enum ContactMission { AAM, SAM, CM, Air, Surface, Sub };

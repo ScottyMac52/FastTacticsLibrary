@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTester.cpp" />
+    <ClCompile Include="ContactTester.cpp" />
     <ClCompile Include="CoordinateConverterTests.cpp" />
     <ClCompile Include="DistanceTests.cpp" />
     <ClCompile Include="PolarCoordinateTests.cpp" />

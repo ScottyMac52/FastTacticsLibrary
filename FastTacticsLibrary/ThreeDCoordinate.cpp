@@ -21,11 +21,11 @@ ThreeDCoordinate::ThreeDCoordinate()
 // Parameter: PolarCoordinate position
 // Parameter: float altitude
 //************************************
-ThreeDCoordinate::ThreeDCoordinate(PolarCoordinate position, float const altitude)
+ThreeDCoordinate::ThreeDCoordinate(PolarCoordinate pcPos, float const fAltitude)
 {
-	_degrees = position.getDegrees();
-	_range = position.getRange();
-	_altitude = altitude;
+	_degrees = pcPos.getDegrees();
+	_range = pcPos.getRange();
+	_altitude = fAltitude;
 }
 
 //************************************
@@ -63,10 +63,10 @@ PolarCoordinate ThreeDCoordinate::getPolarCoordinate() const
 // Qualifier:
 // Parameter: PolarCoordinate polarCoordinate
 //************************************
-void ThreeDCoordinate::setPolarCoordinate(PolarCoordinate polarCoordinate)
+void ThreeDCoordinate::setPolarCoordinate(PolarCoordinate pcPos)
 {
-	setDegrees(polarCoordinate.getDegrees());
-	setRange(polarCoordinate.getRange());
+	setDegrees(pcPos.getDegrees());
+	setRange(pcPos.getRange());
 }
 
 //************************************
@@ -89,9 +89,9 @@ float ThreeDCoordinate::getAltitude() const
 // Qualifier:
 // Parameter: float altitude
 //************************************
-void ThreeDCoordinate::setAltitude(float altitude)
+void ThreeDCoordinate::setAltitude(float const fAltitude)
 {
-	_altitude = altitude;
+	_altitude = fAltitude;
 }
 
 //************************************
@@ -147,12 +147,12 @@ ThreeDCoordinate& ThreeDCoordinate::operator+=(const ThreeDCoordinate & Ref)
 // Qualifier:
 // Parameter: int rounding_digits
 //************************************
-std::wstring ThreeDCoordinate::toString(int rounding_digits) const
+std::wstring ThreeDCoordinate::toString(int const iRoundDigits) const
 {
 	std::wostringstream oss;
 	oss << std::fixed << std::showpoint;
-	oss << std::setprecision(rounding_digits);
-	oss << getPolarCoordinate().toString(rounding_digits);
+	oss << std::setprecision(iRoundDigits);
+	oss << getPolarCoordinate().toString(iRoundDigits);
 	oss << " -> ";
 	oss << getAngels();
 	std::wstring buffer = oss.str();

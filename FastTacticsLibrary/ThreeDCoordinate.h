@@ -7,17 +7,17 @@ class DllExport ThreeDCoordinate :
 {
 public:
 	ThreeDCoordinate();
-	ThreeDCoordinate(PolarCoordinate, float const);
+	ThreeDCoordinate(PolarCoordinate const pcPos, float const fAltitude);
 	ThreeDCoordinate(ThreeDCoordinate const &obj);
 	~ThreeDCoordinate();
 	PolarCoordinate getPolarCoordinate() const;
-	void setPolarCoordinate(PolarCoordinate);
+	void setPolarCoordinate(PolarCoordinate pcPos);
 	float getAltitude() const;
-	void setAltitude(float);
+	void setAltitude(float const fAltitude);
 	bool operator == (const ThreeDCoordinate &Ref) const;
 	ThreeDCoordinate& operator -= (const ThreeDCoordinate &Ref);
 	ThreeDCoordinate& operator += (const ThreeDCoordinate &Ref);
-	virtual std::wstring toString(int rounding_digits) const override;
+	virtual std::wstring toString(int const iRoundDigits) const override;
 	std::wstring getAngels() const;
 private:
 	float _altitude;
