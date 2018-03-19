@@ -36,6 +36,7 @@ public:
 	ContactMission getType() const;
 	~Contact();
 	void Draw(HWND hWnd, TwoDCoordinate size);
+	std::wstring toString(int iRoundingDigits) const override;
 protected:
 	bool _inRange = true;
 	float _speed;

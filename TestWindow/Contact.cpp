@@ -10,8 +10,6 @@
 #include "..\FastTacticsLibrary\PolarCoordinate.h"
 #include "..\FastTacticsLibrary\ErrorProcesser.h"
 
-#define CONTACT_SIZE 10
-#define VELOCITY_VECTOR_MAGNITUDE 20
 
 using namespace std;
 
@@ -238,6 +236,32 @@ void Contact::Draw(HWND hWnd, TwoDCoordinate size)
 	SelectObject(hdc, oldPen);
 	DeleteObject(hPen);
 	ReleaseDC(hWnd, hdc);
+}
+
+//************************************
+// Method:    toString
+// FullName:  Contact::toString
+// Access:    public 
+// Returns:   std::wstring
+// Qualifier: const
+// Parameter: int iRoundingDigits
+//************************************
+std::wstring Contact::toString(int iRoundingDigits) const
+{
+	std::wostringstream oss;
+	oss << std::fixed << std::showpoint;
+	oss << std::setprecision(iRoundingDigits);
+	oss << Personalities[_personality];
+	oss << L" ";
+	oss << Missions[_mission];
+	oss << L":";
+	oss << getPolarCoordinate().toString(iRoundingDigits);
+	oss << L" heading: ";
+	oss << _heading;
+	oss << L" speed: ";
+	oss << _speed;
+	std::wstring buffer = oss.str();
+	return buffer;
 }
 
 //************************************

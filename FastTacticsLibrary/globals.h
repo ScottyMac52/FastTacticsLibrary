@@ -17,3 +17,6 @@
 
 enum ContactPersonality { Unknown, Friendly, Enemy, None };
 enum ContactMission { Air, Surface, Sub, AAM, SAM, CM };
+
+const std::wstring Personalities[] = { L"Unknown", L"Friendly", L"Enemy", L"None" };
+const std::wstring Missions[] = { L"Air", L"Surface", L"Sub", L"AAM", L"SAM", L"CM" };
