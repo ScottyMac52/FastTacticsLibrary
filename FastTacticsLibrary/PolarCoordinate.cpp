@@ -119,6 +119,19 @@ bool PolarCoordinate::operator==(const PolarCoordinate & Ref) const
 }
 
 //************************************
+// Method:    operator!=
+// FullName:  PolarCoordinate::operator!=
+// Access:    public 
+// Returns:   bool
+// Qualifier: const
+// Parameter: const PolarCoordinate & Ref
+//************************************
+bool PolarCoordinate::operator!=(const PolarCoordinate & Ref) const
+{
+	return this->_degrees != Ref.getDegrees() || this->_range != Ref.getRange();
+}
+
+//************************************
 // Method:    operator-=
 // FullName:  PolarCoordinate::operator-=
 // Access:    public 
@@ -158,9 +171,9 @@ std::wstring PolarCoordinate::toString(int rounding_digits) const
 	oss << std::fixed << std::showpoint;
 	oss << std::setprecision(rounding_digits);
 	oss << _degrees;
-	oss << "° at ";
+	oss << L"° at ";
 	oss << _range;
-	oss << " units";
+	oss << L" units";
 	std::wstring buffer = oss.str();
 	return buffer;
 }

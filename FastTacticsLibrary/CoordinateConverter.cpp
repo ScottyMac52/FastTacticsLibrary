@@ -155,6 +155,53 @@ PolarCoordinate CoordinateConverter::ConvertFrom2DToPolar(TwoDCoordinate source)
 }
 
 //************************************
+// Method:    CalculatePointFromDegrees
+// FullName:  CoordinateConverter::CalculatePointFromDegrees
+// Access:    public static 
+// Returns:   TwoDCoordinate
+// Qualifier:
+// Parameter: TwoDCoordinate offset
+// Parameter: float fDegrees
+// Parameter: float fRadius
+//************************************
+TwoDCoordinate CoordinateConverter::CalculatePointFromDegrees(TwoDCoordinate offset, float fDegrees, float fRadius)
+{
+	float fTheta = NORTH_PRIME;
+	
+	if(fDegrees >= NORTH_PRIME && fDegrees <= EAST)
+	{
+		fTheta = EAST - fDegrees;
+	}
+	else if (fDegrees > WEST && fDegrees <= NORTH)
+	{
+		fTheta = EAST + (NORTH - fDegrees);
+	}
+	// Quadrant 3
+	else if (fDegrees > SOUTH && fDegrees <= WEST)
+	{
+		fTheta = WEST - (fDegrees - SOUTH);
+	}
+	// Quadrant 4, y is negative so sin is negative
+	else if (fDegrees > EAST && fDegrees <= SOUTH)
+	{
+		fTheta = WEST + (SOUTH - fDegrees);
+	}
+
+	float fRadians = DegreesToRadians(fTheta);
+	// X is radius * Cos(theta in radians)
+	float fXvalue = fRadius * cos(fRadians);
+	// Y is radius * Sin(theta in radians)
+	float fYvalue = fRadius * sin(fRadians);
+
+	// Account for specified offset
+	float x = offset.getX() + fXvalue;
+	float y = offset.getY() + fYvalue;
+
+	return TwoDCoordinate(x,y);
+}
+
+
+//************************************
 // Method:    DegreesToRadians
 // FullName:  CoordinateConverter::DegreesToRadians
 // Access:    private static 

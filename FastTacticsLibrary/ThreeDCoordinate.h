@@ -3,7 +3,7 @@
 #include "globals.h"
 
 class DllExport ThreeDCoordinate :
-	protected PolarCoordinate
+	public PolarCoordinate
 {
 public:
 	ThreeDCoordinate();
@@ -15,11 +15,12 @@ public:
 	float getAltitude() const;
 	void setAltitude(float const fAltitude);
 	bool operator == (const ThreeDCoordinate &Ref) const;
+	bool operator != (const ThreeDCoordinate &Ref) const;
 	ThreeDCoordinate& operator -= (const ThreeDCoordinate &Ref);
 	ThreeDCoordinate& operator += (const ThreeDCoordinate &Ref);
 	virtual std::wstring toString(int const iRoundDigits) const override;
 	std::wstring getAngels() const;
-private:
+protected:
 	float _altitude;
 };
 

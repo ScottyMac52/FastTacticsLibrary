@@ -50,8 +50,5 @@
     <ClCompile Include="ThreeDCoordinateTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ContactTester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -148,8 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ClassShower.h" />
-    <ClInclude Include="Contact.h" />
     <ClInclude Include="CoordinateConverter.h" />
+    <ClInclude Include="ErrorProcesser.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="PolarCoordinate.h" />
     <ClInclude Include="stdafx.h" />
@@ -159,9 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClassShower.cpp" />
-    <ClCompile Include="Contact.cpp" />
     <ClCompile Include="CoordinateConverter.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="ErrorProcesser.cpp" />
     <ClCompile Include="FastTacticsLibrary.cpp" />
     <ClCompile Include="PolarCoordinate.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -175,16 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FastTacticsLibrary.cd" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\wtl.9.1.1\build\native\wtl.targets" Condition="Exists('..\packages\wtl.9.1.1\build\native\wtl.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\wtl.9.1.1\build\native\wtl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\wtl.9.1.1\build\native\wtl.targets'))" />
-  </Target>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

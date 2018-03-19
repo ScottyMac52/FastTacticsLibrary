@@ -22,6 +22,7 @@ public:
 	TwoDCoordinate getRelativePosition(TwoDCoordinate *);
 	float getDistance(TwoDCoordinate);
 	bool operator == (const TwoDCoordinate &Ref) const;
+	bool operator != (const TwoDCoordinate &Ref) const;
 	TwoDCoordinate& operator-=(const TwoDCoordinate &Ref);
 	TwoDCoordinate& operator+=(const TwoDCoordinate & Ref);
 	virtual std::wstring toString(int rounding_digits) const override;

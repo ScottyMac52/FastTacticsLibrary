@@ -25,16 +25,24 @@ void BaseTester::AssertOnActualNotEqualToExpected(float expected, float actual)
 
 std::wstring BaseTester::GetAssertError(std::wstring expected, std::wstring actual) const
 {
-	wchar_t buffer[200];
-	swprintf_s(buffer, 200, L"Expected: %s, Actual: %s", expected.c_str(), actual.c_str());
-	return std::wstring(buffer);
+	std::wostringstream oss;
+	oss << "Expected: ";
+	oss << expected;
+	oss << ", Actual ";
+	oss << actual;
+	std::wstring buffer = oss.str();
+	return buffer;
 }
 
 std::wstring BaseTester::GetAssertError(float expected, float actual) const
 {
-	wchar_t buffer[200];
-	swprintf_s(buffer, 200, L"Expected: %f, Actual: %f", expected, actual);
-	return std::wstring(buffer);
+	std::wostringstream oss;
+	oss << "Expected: ";
+	oss << expected;
+	oss << ", Actual ";
+	oss << actual;
+	std::wstring buffer = oss.str();
+	return buffer;
 }
 
 

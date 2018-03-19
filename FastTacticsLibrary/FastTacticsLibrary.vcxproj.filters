@@ -39,7 +39,7 @@
     <ClInclude Include="ClassShower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Contact.h">
+    <ClInclude Include="ErrorProcesser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,12 +68,11 @@
     <ClCompile Include="ClassShower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Contact.cpp">
+    <ClCompile Include="ErrorProcesser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="FastTacticsLibrary.cd" />
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

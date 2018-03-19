@@ -215,6 +215,20 @@ bool TwoDCoordinate::operator==(const TwoDCoordinate &Ref) const
 }
 
 //************************************
+// Method:    operator!=
+// FullName:  TwoDCoordinate::operator!=
+// Access:    public 
+// Returns:   bool
+// Qualifier: const
+// Parameter: const TwoDCoordinate & Ref
+//************************************
+bool TwoDCoordinate::operator!=(const TwoDCoordinate &Ref) const
+{
+	return this->_x != Ref.getX() || this->_y != Ref.getY();
+}
+
+
+//************************************
 // Method:    operator-=
 // FullName:  TwoDCoordinate::operator-=
 // Access:    public 
@@ -250,7 +264,7 @@ std::wstring TwoDCoordinate::toString(int rounding_digits) const
 	oss << std::fixed << std::showpoint;
 	oss << std::setprecision(rounding_digits);
 	oss << _x;
-	oss << ", ";
+	oss << L", ";
 	oss << _y;
 	std::wstring buffer = oss.str();
 	return buffer;

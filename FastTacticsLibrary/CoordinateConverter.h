@@ -13,5 +13,6 @@ public:
 	static TwoDCoordinate ConvertFromRelativeToAbsolute(TwoDCoordinate, float, float);
 	static TwoDCoordinate ConvertFromAbsoluteToRelative(TwoDCoordinate, float, float);
 	static PolarCoordinate ConvertFrom2DToPolar(TwoDCoordinate);
+	static TwoDCoordinate CalculatePointFromDegrees(TwoDCoordinate offset, float fDegrees, float fRadius);
 };
 

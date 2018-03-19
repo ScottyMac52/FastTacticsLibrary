@@ -104,7 +104,20 @@ void ThreeDCoordinate::setAltitude(float const fAltitude)
 //************************************
 bool ThreeDCoordinate::operator==(const ThreeDCoordinate & Ref) const
 {
-	return getPolarCoordinate() == Ref.getPolarCoordinate();
+	return getPolarCoordinate() == Ref.getPolarCoordinate() && _altitude == Ref.getAltitude();
+}
+
+//************************************
+// Method:    operator!=
+// FullName:  ThreeDCoordinate::operator==
+// Access:    public 
+// Returns:   bool
+// Qualifier: const
+// Parameter: const ThreeDCoordinate & Ref
+//************************************
+bool ThreeDCoordinate::operator!=(const ThreeDCoordinate & Ref) const
+{
+	return getPolarCoordinate() != Ref.getPolarCoordinate() || _altitude != Ref.getAltitude();
 }
 
 //************************************
@@ -153,7 +166,7 @@ std::wstring ThreeDCoordinate::toString(int const iRoundDigits) const
 	oss << std::fixed << std::showpoint;
 	oss << std::setprecision(iRoundDigits);
 	oss << getPolarCoordinate().toString(iRoundDigits);
-	oss << " -> ";
+	oss << L" -> ";
 	oss << getAngels();
 	std::wstring buffer = oss.str();
 	return buffer;
@@ -168,28 +181,11 @@ std::wstring ThreeDCoordinate::toString(int const iRoundDigits) const
 //************************************
 std::wstring ThreeDCoordinate::getAngels() const
 {
-	std::wostringstream oss;
 	std::wostringstream angels_out;
-	angels_out << std::fixed << std::showpoint;
-	oss << std::fixed << std::showpoint;
-	oss << (int) _altitude;
-	std::wstring buffer = oss.str();
-	int length = buffer.length();
-
-	angels_out << "Angels ";
-	switch (length)
-	{
-		case 0:
-		case 1:
-		case 2:
-		case 3:
-			angels_out << 0;
-			break;
-		default:
-			angels_out << buffer.substr(0, length - 3);
-			break;
-	}
-	
+	angels_out << std::fixed;
+	angels_out << std::setprecision(0);
+	angels_out << L"Angels ";
+	angels_out << (int)_altitude / 1000.0F;
 	return angels_out.str();
 }
 

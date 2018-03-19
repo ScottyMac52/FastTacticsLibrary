@@ -22,6 +22,7 @@ public:
 	void setDegrees(float const);
 	void setRange(float const);
 	bool operator == (const PolarCoordinate &Ref) const;
+	bool operator != (const PolarCoordinate &Ref) const;
 	PolarCoordinate operator -= (const PolarCoordinate &Ref) const;
 	PolarCoordinate operator += (const PolarCoordinate &Ref) const;
 	std::wstring toString(int rounding_digits) const override;
