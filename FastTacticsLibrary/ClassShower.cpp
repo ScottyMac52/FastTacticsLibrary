@@ -5,11 +5,10 @@ ClassShower::ClassShower()
 {
 }
 
-std::wstring ClassShower::toString(int rounding_digits) const
+std::wstring ClassShower::toString() const
 {
 	return std::wstring(L"Nothing to see here");
 }
-
 
 ClassShower::~ClassShower()
 {

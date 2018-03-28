@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_FLOAT_DIGITS 4
+#define FLOAT_PRECISION 4
 #define HALF(x) (float) x / 2.00F
 #define GET_DISTANCE(secondPoint) firstPoint.getDistance(secondPoint) 
 #define ASSERT_DISTANCE(first, second) AssertOnActualNotEqualToExpected(first, second)

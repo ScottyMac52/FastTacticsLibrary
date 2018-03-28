@@ -24,7 +24,7 @@ class Contact :
 	public ThreeDCoordinate
 {
 public:
-	Contact(PolarCoordinate pcPos, float const fAltitude, float const fSpeed, float const fHeading, ContactPersonality const cpThreat, ContactMission const cmType);
+	Contact(float const fDegrees, float const fRange, float const fAltitude, float const fSpeed, float const fHeading, ContactPersonality const cpThreat, ContactMission const cmType, int iFloatPrecision);
 	bool ProcessMovement();
 	bool ChangeSpeed(float const fSpeed);
 	bool ChangeHeading(float const fHeading);
@@ -36,16 +36,14 @@ public:
 	ContactMission getType() const;
 	~Contact();
 	void Draw(HWND hWnd, TwoDCoordinate size);
-	std::wstring toString(int iRoundingDigits) const override;
+	std::wstring toString() const override;
 protected:
 	bool _inRange = true;
 	float _speed;
 	float _heading;
-	bool _timerStarted = false;
 	ContactPersonality _personality;
 	ContactMission _mission;
 	clock_t _ptmMark;
-	bool CheckForTimerStart();
 	bool DrawVelocityVector(HDC hdc, TwoDCoordinate currentPos, COLORREF cColor, TwoDCoordinate size);
 	void DrawVisibleContact(HDC hdc, TwoDCoordinate coordAbs);
 	void DrawAngleArc(HDC hdc, TwoDCoordinate &coordAbs, float startAngle, float endAngle);

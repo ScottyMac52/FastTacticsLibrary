@@ -5,9 +5,10 @@
 #include <sstream> 
 #include <iomanip>
 #include "ClassShower.h"
+#include "Precision.h"
 
 class DllExport PolarCoordinate :
-	protected ClassShower
+	public Precision, protected ClassShower
 {
 protected:
 	float _degrees;
@@ -15,6 +16,8 @@ protected:
 public:
 	PolarCoordinate();
 	PolarCoordinate(float, float);
+	PolarCoordinate(float degrees, float range, int iFloatPrecision);
+	PolarCoordinate(PolarCoordinate const & obj, int iFloatPrecision);
 	PolarCoordinate(PolarCoordinate const &obj);
 	~PolarCoordinate();
 	float getDegrees() const;
@@ -25,7 +28,6 @@ public:
 	bool operator != (const PolarCoordinate &Ref) const;
 	PolarCoordinate operator -= (const PolarCoordinate &Ref) const;
 	PolarCoordinate operator += (const PolarCoordinate &Ref) const;
-	std::wstring toString(int rounding_digits) const override;
-
+	std::wstring toString() const override;
 };
 

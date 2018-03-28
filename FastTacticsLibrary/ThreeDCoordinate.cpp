@@ -1,17 +1,11 @@
 #include "stdafx.h"
 #include "ThreeDCoordinate.h"
 
-//************************************
-// Method:    ThreeDCoordinate
-// FullName:  ThreeDCoordinate::ThreeDCoordinate
-// Access:    public 
-// Returns:   
-// Qualifier:
-//************************************
-ThreeDCoordinate::ThreeDCoordinate()
+/*
+ThreeDCoordinate::ThreeDCoordinate(float const fDegrees, float const fRange, float const fAltitude) : ThreeDCoordinate(fDegrees, fRange, fAltitude, FLOAT_PRECISION)
 {
 }
-
+*/
 //************************************
 // Method:    ThreeDCoordinate
 // FullName:  ThreeDCoordinate::ThreeDCoordinate
@@ -21,27 +15,12 @@ ThreeDCoordinate::ThreeDCoordinate()
 // Parameter: PolarCoordinate position
 // Parameter: float altitude
 //************************************
-ThreeDCoordinate::ThreeDCoordinate(PolarCoordinate pcPos, float const fAltitude)
+ThreeDCoordinate::ThreeDCoordinate(float const fDegrees, float const fRange, float const fAltitude, int const iFloatPrecision) : PolarCoordinate(fDegrees, fRange, iFloatPrecision)
 {
-	_degrees = pcPos.getDegrees();
-	_range = pcPos.getRange();
 	_altitude = fAltitude;
+	_iFloatingPrecision = iFloatPrecision;
 }
 
-//************************************
-// Method:    ThreeDCoordinate
-// FullName:  ThreeDCoordinate::ThreeDCoordinate
-// Access:    public 
-// Returns:   
-// Qualifier:
-// Parameter: ThreeDCoordinate const & obj
-//************************************
-ThreeDCoordinate::ThreeDCoordinate(ThreeDCoordinate const & obj)
-{
-	_degrees = obj._degrees;
-	_range = obj._range;
-	_altitude = obj._altitude;
-}
 
 //************************************
 // Method:    getPolarCoordinate
@@ -52,7 +31,7 @@ ThreeDCoordinate::ThreeDCoordinate(ThreeDCoordinate const & obj)
 //************************************
 PolarCoordinate ThreeDCoordinate::getPolarCoordinate() const
 {
-	return (PolarCoordinate)*this;
+	return PolarCoordinate(this->getDegrees(), this->getRange(), _iFloatingPrecision);
 }
 
 //************************************
@@ -160,12 +139,12 @@ ThreeDCoordinate& ThreeDCoordinate::operator+=(const ThreeDCoordinate & Ref)
 // Qualifier:
 // Parameter: int rounding_digits
 //************************************
-std::wstring ThreeDCoordinate::toString(int const iRoundDigits) const
+std::wstring ThreeDCoordinate::toString() const 
 {
 	std::wostringstream oss;
 	oss << std::fixed << std::showpoint;
-	oss << std::setprecision(iRoundDigits);
-	oss << getPolarCoordinate().toString(iRoundDigits);
+	oss << std::setprecision(GetPrecision());
+	oss << getPolarCoordinate().toString();
 	oss << L" -> ";
 	oss << getAngels();
 	std::wstring buffer = oss.str();

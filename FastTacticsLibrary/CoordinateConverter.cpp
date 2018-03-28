@@ -36,6 +36,22 @@ TwoDCoordinate CoordinateConverter::ConvertFromAbsoluteToRelative(TwoDCoordinate
 	return source.getRelativePosition(sizeX, sizeY);
 }
 
+/*
+TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(float fDegrees, float fRange, int iFloatPrecision = FLOAT_PRECISION)
+{
+	TwoDCoordinate offSet = TwoDCoordinate(0.0F, 0.0F);
+	PolarCoordinate pcPos = PolarCoordinate(fDegrees, fRange, iFloatPrecision);
+	return ConvertFromPolarTo2D(pcPos, offSet);
+}
+*/
+
+TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(float fDegrees, float fRange, int iFloatPrecision = FLOAT_PRECISION, TwoDCoordinate offSet = TwoDCoordinate(0.0F, 0.0F))
+{
+	PolarCoordinate pcPos = PolarCoordinate(fDegrees, fRange, iFloatPrecision);
+	return ConvertFromPolarTo2D(pcPos, offSet);
+}
+
+
 //************************************
 // Method:    ConvertFromPolarTo2D
 // FullName:  CoordinateConverter::ConvertFromPolarTo2D
@@ -45,7 +61,7 @@ TwoDCoordinate CoordinateConverter::ConvertFromAbsoluteToRelative(TwoDCoordinate
 // Parameter: PolarCoordinate source
 // Parameter: TwoDCoordinate offSet
 //************************************
-TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(PolarCoordinate source, TwoDCoordinate offSet)
+TwoDCoordinate CoordinateConverter::ConvertFromPolarTo2D(PolarCoordinate source, TwoDCoordinate offSet = TwoDCoordinate(0.0F, 0.0F))
 {
 	float newX, newY, degrees, range;
 

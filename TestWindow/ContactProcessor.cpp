@@ -10,8 +10,9 @@
 
 using namespace std;
 
-ContactProcessor::ContactProcessor()
+ContactProcessor::ContactProcessor(int iFloatPrecision)
 {
+	_iFloatPrecision = iFloatPrecision;
 }
 
 //************************************
@@ -50,9 +51,18 @@ void ContactProcessor::RemoveContact(int index)
 //************************************
 map<int, Contact> ContactProcessor::ProcessAndReturnMap()
 {
+	int randNum = GetRandomNumber(0, contactMap.size() - 1);
 	std::map<int, Contact>::iterator it = contactMap.begin();
 	while (it != contactMap.end())
 	{
+		// One has been picked to be changed
+		if(it->first == randNum)
+		{
+			float fMin = (it->second.getHeading() - 30.0F) < 0.0F ? 0.0F : it->second.getHeading() - 30.0F;
+			float fMax = (it->second.getHeading() + 30.0F) > 360.F ? 0.0F : it->second.getHeading() + 30.0F;
+			float newHeading = GetRandomNumber(fMin, fMax);
+			it->second.ChangeHeading(newHeading);
+		}
 		it->second.ProcessMovement();
 		if(it->second.getRange() > max(_size.getX(), _size.getY())/2)
 		{
@@ -106,17 +116,19 @@ void ContactProcessor::DrawContacts(HWND hWnd)
 //************************************
 bool ContactProcessor::CreateRandomContacts(int iMin, int iMax)
 {
-	int randNum = rand() % (iMax - iMin + 1) + iMin;
+	srand(time(NULL));
+
+	int randNum = GetRandomNumber(iMin, iMax);
 	for (int i = 0; i < randNum; ++i) {
 
 		float randomSpeed = 0.0F;
 		float randomAltitude = 0.0F;
-		float randomDegrees = rand() % (360 - 0 + 1);
-		float randomHeading = rand() % (360 - 0 + 1);
-		float randomRange = rand() % (max((int)_size.getX() / 2, (int)_size.getY() / 2) - 0 + 1);
+		float randomDegrees = GetRandomNumber(0.0F, 360.0F);
+		float randomHeading = GetRandomNumber(0.0F, 360.0F);
+		float randomRange = GetRandomNumber(0, max((int)_size.getX() / 2, (int)_size.getY() / 2));
 		ContactPersonality randomPers = GetARandomPersonality();
 		ContactMission randomMission = GetARandomContactMission(randomSpeed, randomAltitude);
-		CreateContact(PolarCoordinate(randomDegrees, randomRange), randomHeading, randomSpeed, randomAltitude, randomPers, randomMission);
+		CreateContact(randomDegrees, randomRange, randomHeading, randomSpeed, randomAltitude, randomPers, randomMission);
 	}
 
 	return true;
@@ -131,7 +143,7 @@ bool ContactProcessor::CreateRandomContacts(int iMin, int iMax)
 //************************************
 ContactPersonality ContactProcessor::GetARandomPersonality()
 {
-	return static_cast<ContactPersonality>(rand() % ContactPersonality::None);
+	return static_cast<ContactPersonality>(GetRandomNumber(ContactPersonality::Unknown, ContactPersonality::None));
 }
 
 //************************************
@@ -145,19 +157,19 @@ ContactPersonality ContactProcessor::GetARandomPersonality()
 //************************************
 ContactMission ContactProcessor::GetARandomContactMission(float &speed, float &altitude)
 {
-	ContactMission selectedMission = static_cast<ContactMission>(rand() % ContactMission::Sub);
+	ContactMission selectedMission = static_cast<ContactMission>(GetRandomNumber(ContactMission::Air, ContactMission::Sub));
 	switch (selectedMission)
 	{
 	case Air:
-		speed = rand() % (7800 - 450 + 1) + 450;
-		altitude = rand() % (72000 - 1200 + 1) + 1200;
+		speed = GetRandomNumber(450.0F, 10000.0F);
+		altitude = GetRandomNumber(5.0F, 72000.0F);
 		break;
 	case Surface:
-		speed = rand() % (78 - 0 + 1) + 0;
+		speed = GetRandomNumber(0.0F, 78.0F);
 		altitude = 0.0F;
 		break;
 	case Sub:
-		speed = rand() % (65 - 0 + 1) + 0;
+		speed = GetRandomNumber(0.0F, 65.0F);
 		altitude = 0.0F;
 		break;
 	case AAM:
@@ -182,9 +194,9 @@ ContactMission ContactProcessor::GetARandomContactMission(float &speed, float &a
 // Parameter: ContactPersonality cpThreat
 // Parameter: ContactMission cmType
 //************************************
-Contact ContactProcessor::CreateContact(PolarCoordinate pcCoord, float heading, float speed, float altitude, ContactPersonality cpThreat, ContactMission cmType)
+Contact ContactProcessor::CreateContact(float randomDegrees, float randomRange, float heading, float speed, float altitude, ContactPersonality cpThreat, ContactMission cmType)
 {
-	Contact newContact = Contact(pcCoord, altitude, speed, heading, cpThreat, cmType);
+	Contact newContact = Contact(randomDegrees, randomRange, altitude, speed, heading, cpThreat, cmType, _iFloatPrecision);
 	AddContact(newContact);
 	return newContact;
 }
@@ -212,7 +224,8 @@ Contact * ContactProcessor::FindContact(int xPos, int yPos)
 	std::map<int, Contact>::iterator it = contactMap.begin();
 	while (it != contactMap.end())
 	{
-		TwoDCoordinate relPos = CoordinateConverter::ConvertFromPolarTo2D(it->second.getPolarCoordinate());
+		PolarCoordinate pc = it->second.getPolarCoordinate();
+		TwoDCoordinate relPos = CoordinateConverter::ConvertFromPolarTo2D(pc.getDegrees(), pc.getRange(), _iFloatPrecision, TwoDCoordinate(0.0F, 0.0F));
 		TwoDCoordinate absPos = relPos.getAbsolutePosition(&_size);
 		contact.left = absPos.getX() - 10;
 		contact.top = absPos.getY() - 10;
@@ -228,6 +241,25 @@ Contact * ContactProcessor::FindContact(int xPos, int yPos)
 	return NULL;
 }
 
+//************************************
+// Method:    GetRandomNumber
+// FullName:  ContactProcessor::GetRandomNumber
+// Access:    public 
+// Returns:   int
+// Qualifier:
+// Parameter: int iFloor
+// Parameter: int iCeiling
+//************************************
+int ContactProcessor::GetRandomNumber(int iFloor, int iCeiling)
+{
+	return rand() % (iCeiling - iFloor + 1) + iFloor;
+
+}
+
+float ContactProcessor::GetRandomNumber(float fFloor, float fCeiling)
+{
+	return rand() % (int) (fCeiling - fFloor + 1) + fFloor;
+}
 
 
 ContactProcessor::~ContactProcessor()

@@ -152,6 +152,7 @@
     <ClInclude Include="ErrorProcesser.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="PolarCoordinate.h" />
+    <ClInclude Include="Precision.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeDCoordinate.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="ErrorProcesser.cpp" />
     <ClCompile Include="FastTacticsLibrary.cpp" />
     <ClCompile Include="PolarCoordinate.cpp" />
+    <ClCompile Include="Precision.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

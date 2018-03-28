@@ -13,28 +13,13 @@
 
 using namespace std;
 
-//************************************
-// Method:    Contact
-// FullName:  Contact::Contact
-// Access:    public 
-// Returns:   
-// Qualifier:
-// Parameter: PolarCoordinate pcPos
-// Parameter: float const fAltitude
-// Parameter: float const fSpeed
-// Parameter: float const fHeading
-// Parameter: ContactPersonality const cpThreat
-// Parameter: ContactMission const cmType
-//************************************
-Contact::Contact(PolarCoordinate pcPos, float const fAltitude, float const fSpeed, float const fHeading, ContactPersonality const cpThreat, ContactMission const cmType)
+Contact::Contact(float const fDegrees, float const fRange, float const fAltitude, float const fSpeed, float const fHeading, ContactPersonality const cpThreat, ContactMission const cmType, int iFloatPrecision) : ThreeDCoordinate(fDegrees, fRange, fAltitude, iFloatPrecision)
 {
-	_range = pcPos.getRange();
-	_degrees = pcPos.getDegrees();
 	_speed = fSpeed;
 	_heading = fHeading;
 	_personality = cpThreat;
 	_mission = cmType;
-	_altitude = fAltitude;
+	_ptmMark = clock();
 	ProcessMovement();
 }
 
@@ -47,7 +32,7 @@ Contact::Contact(PolarCoordinate pcPos, float const fAltitude, float const fSpee
 //************************************
 bool Contact::ProcessMovement()
 {
-	if (CheckForTimerStart() && _inRange)
+	if (_inRange)
 	{
 		// The timer is running so now we use the speed and heading to figure out 
 		// where the contact is
@@ -63,7 +48,7 @@ bool Contact::ProcessMovement()
 			_ptmMark = clock();
 
 			_distanceMoved = durationSeconds * (_speed / 3600.0F);
-			TwoDCoordinate tDCurrent = CoordinateConverter::ConvertFromPolarTo2D(this->getPolarCoordinate());
+			TwoDCoordinate tDCurrent = CoordinateConverter::ConvertFromPolarTo2D(getDegrees(), getRange(), GetPrecision(), TwoDCoordinate(0.0F, 0.0F));
 			TwoDCoordinate tDCoord = CoordinateConverter::CalculatePointFromDegrees(tDCurrent, _heading, _distanceMoved);
 			PolarCoordinate newPos = CoordinateConverter::ConvertFrom2DToPolar(tDCoord);
 			_degrees = newPos.getDegrees();
@@ -211,7 +196,7 @@ void Contact::Draw(HWND hWnd, TwoDCoordinate size)
 		return;
 	}
 
-	TwoDCoordinate coord = CoordinateConverter::ConvertFromPolarTo2D(getPolarCoordinate(), TwoDCoordinate(0.0F, 0.0F));
+	TwoDCoordinate coord = CoordinateConverter::ConvertFromPolarTo2D(getPolarCoordinate().getDegrees(), getPolarCoordinate().getRange(), GetPrecision(), TwoDCoordinate(0.0F, 0.0F));
 	TwoDCoordinate coordAbs = coord.getAbsolutePosition(&size);
 
 	COLORREF defaultColor = YELLOW;
@@ -246,40 +231,22 @@ void Contact::Draw(HWND hWnd, TwoDCoordinate size)
 // Qualifier: const
 // Parameter: int iRoundingDigits
 //************************************
-std::wstring Contact::toString(int iRoundingDigits) const
+std::wstring Contact::toString() const 
 {
 	std::wostringstream oss;
 	oss << std::fixed << std::showpoint;
-	oss << std::setprecision(iRoundingDigits);
+	oss << std::setprecision(_iFloatingPrecision);
 	oss << Personalities[_personality];
 	oss << L" ";
 	oss << Missions[_mission];
 	oss << L":";
-	oss << getPolarCoordinate().toString(iRoundingDigits);
+	oss << getPolarCoordinate().toString();
 	oss << L" heading: ";
 	oss << _heading;
 	oss << L" speed: ";
 	oss << _speed;
 	std::wstring buffer = oss.str();
 	return buffer;
-}
-
-//************************************
-// Method:    CheckForTimerStart
-// FullName:  Contact::CheckForTimerStart
-// Access:    protected 
-// Returns:   bool
-// Qualifier:
-//************************************
-bool Contact::CheckForTimerStart()
-{
-	if (!_timerStarted)
-	{
-		_ptmMark = clock();
-		_timerStarted = true;
-		return false;
-	}
-	return true;
 }
 
 //************************************

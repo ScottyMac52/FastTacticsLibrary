@@ -14,14 +14,7 @@
 #include "stdafx.h"
 #include "PolarCoordinate.h"
 
-//************************************
-// Method:    PolarCoordinate
-// FullName:  PolarCoordinate::PolarCoordinate
-// Access:    public 
-// Returns:   
-// Qualifier:
-//************************************
-PolarCoordinate::PolarCoordinate()
+PolarCoordinate::PolarCoordinate() : PolarCoordinate(0.0F, 0.0F, FLOAT_PRECISION)
 {
 }
 
@@ -34,10 +27,8 @@ PolarCoordinate::PolarCoordinate()
 // Parameter: float degrees
 // Parameter: float range
 //************************************
-PolarCoordinate::PolarCoordinate(float degrees, float range)
+PolarCoordinate::PolarCoordinate(float degrees, float range) : PolarCoordinate(degrees, range, FLOAT_PRECISION)
 {
-	_degrees = degrees;
-	_range = range;
 }
 
 //************************************
@@ -48,10 +39,29 @@ PolarCoordinate::PolarCoordinate(float degrees, float range)
 // Qualifier:
 // Parameter: PolarCoordinate const & obj
 //************************************
-PolarCoordinate::PolarCoordinate(PolarCoordinate const &obj)
+PolarCoordinate::PolarCoordinate(PolarCoordinate const &obj, int iFloatPrecision) : PolarCoordinate(obj.getDegrees(), obj.getRange(), iFloatPrecision)
 {
-	_degrees = obj.getDegrees();
-	_range = obj.getRange();
+}
+
+//************************************
+// Method:    PolarCoordinate
+// FullName:  PolarCoordinate::PolarCoordinate
+// Access:    public 
+// Returns:   
+// Qualifier:
+// Parameter: float degrees
+// Parameter: float range
+//************************************
+PolarCoordinate::PolarCoordinate(float degrees, float range, int iFloatPrecision) : ClassShower(), Precision(iFloatPrecision)
+{
+	_degrees = degrees;
+	_range = range;
+}
+
+
+
+PolarCoordinate::PolarCoordinate(PolarCoordinate const & obj) : PolarCoordinate(obj, FLOAT_PRECISION)
+{
 }
 
 
@@ -165,11 +175,11 @@ PolarCoordinate PolarCoordinate::operator+=(const PolarCoordinate & Ref) const
 // Qualifier:
 // Parameter: int rounding_digits
 //************************************
-std::wstring PolarCoordinate::toString(int rounding_digits) const
+std::wstring PolarCoordinate::toString() const
 {
 	std::wostringstream oss;
 	oss << std::fixed << std::showpoint;
-	oss << std::setprecision(rounding_digits);
+	oss << std::setprecision(GetPrecision());
 	oss << _degrees;
 	oss << L"° at ";
 	oss << _range;

@@ -13,7 +13,8 @@ namespace Tacticstests
 	TEST_CLASS(CoordinateConverterTests), public BaseTester
 	{
 	private:
-		const int ROUNDING_DIGITS = MAX_FLOAT_DIGITS;
+		const int ROUNDING_DIGITS = FLOAT_PRECISION;
+		const TwoDCoordinate _offSet = TwoDCoordinate(0.0F, 0.0F);
 	public:
 
 #pragma region Quadrant I tests 15 -> 75 degrees
@@ -27,11 +28,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor30Degrees, L"Quadrant I")
@@ -43,11 +44,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor45Degrees, L"Quadrant I")
@@ -59,11 +60,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor60Degrees, L"Quadrant I")
@@ -75,11 +76,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor75Degrees, L"Quadrant I")
@@ -91,11 +92,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 #pragma endregion Quadrant I tests 15 -> 75 degrees
 
@@ -109,11 +110,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 #pragma endregion 90 due east degree test
 
@@ -128,11 +129,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor120Degrees, L"Quadrant IV")
@@ -144,11 +145,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor135Degrees, L"Quadrant IV")
@@ -160,11 +161,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor150Degrees, L"Quadrant IV")
@@ -176,11 +177,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor165Degrees, L"Quadrant IV")
@@ -192,11 +193,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 
@@ -213,11 +214,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 #pragma endregion 180 due south degree test
@@ -233,11 +234,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 		TEST_CATEGORY(Testfor210Degrees, L"Quadrant III")
 		TEST_METHOD(Testfor210Degrees)
@@ -248,11 +249,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor225Degrees, L"Quadrant III")
@@ -264,11 +265,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor240Degrees, L"Quadrant III")
@@ -280,11 +281,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor255Degrees, L"Quadrant III")
@@ -296,11 +297,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 
@@ -317,11 +318,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 #pragma endregion 270 due west degree test
@@ -337,11 +338,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor300Degrees, L"Quadrant II")
@@ -353,11 +354,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor315Degrees, L"Quadrant II")
@@ -369,11 +370,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor330Degrees, L"Quadrant II")
@@ -385,11 +386,11 @@ namespace Tacticstests
 			
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor345Degrees, L"Quadrant II")
@@ -401,11 +402,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 #pragma endregion Quadrant II tests 285 -> 345 degrees
@@ -421,11 +422,11 @@ namespace Tacticstests
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
-			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual);
+			TwoDCoordinate convertedPoint = CoordinateConverter::ConvertFromPolarTo2D(actual, _offSet);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), actual.toString(ROUNDING_DIGITS));
-			AssertOnActualNotEqualToExpected(testPoint.toString(ROUNDING_DIGITS), convertedPoint.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
+			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
 		}
 
 #pragma endregion 360 due north degree test

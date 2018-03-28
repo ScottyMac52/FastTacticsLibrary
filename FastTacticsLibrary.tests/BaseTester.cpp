@@ -45,7 +45,6 @@ std::wstring BaseTester::GetAssertError(float expected, float actual) const
 	return buffer;
 }
 
-
 BaseTester::BaseTester()
 {
 }

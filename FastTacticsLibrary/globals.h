@@ -6,6 +6,8 @@
 #define Square(a) (float) (a * a)
 #define FLOAT_PI (float) M_PI
 
+#define FLOAT_PRECISION 4
+
 #define NORTH_PRIME 0.00F
 #define NORTH 360.00F
 #define SOUTH 180.00F

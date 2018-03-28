@@ -1,9 +1,10 @@
 #pragma once
 #include "globals.h"
 #include "ClassShower.h"
+#include "Precision.h"
 
 class DllExport TwoDCoordinate :
-	protected ClassShower
+	protected ClassShower, Precision
 {
 private:
 	float _x;
@@ -11,7 +12,8 @@ private:
 public:
 	TwoDCoordinate();
 	TwoDCoordinate(float, float);
-	TwoDCoordinate(const TwoDCoordinate &obj);
+	TwoDCoordinate(float x, float y, int iFloatPrecision);
+	TwoDCoordinate(const TwoDCoordinate & obj, int iFloatPrecision);
 	void setX(float);
 	void setY(float);
 	float getX() const;
@@ -25,6 +27,6 @@ public:
 	bool operator != (const TwoDCoordinate &Ref) const;
 	TwoDCoordinate& operator-=(const TwoDCoordinate &Ref);
 	TwoDCoordinate& operator+=(const TwoDCoordinate & Ref);
-	virtual std::wstring toString(int rounding_digits) const override;
+	virtual std::wstring toString() const override;
 	~TwoDCoordinate();
 };

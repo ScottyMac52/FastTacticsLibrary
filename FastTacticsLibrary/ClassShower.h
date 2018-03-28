@@ -9,7 +9,7 @@ class DllExport ClassShower
 {
 public:
 	ClassShower();
-	virtual std::wstring toString(int rounding_digits) const;
+	virtual std::wstring toString() const;
 	~ClassShower();
 };
 

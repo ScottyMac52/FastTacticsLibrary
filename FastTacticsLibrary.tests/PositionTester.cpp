@@ -13,7 +13,7 @@ namespace Tacticstests
 	private:
 		const float MaxX = 600.00F;
 		const float MaxY = 600.00F;
-		const int ROUNDING_DIGITS = MAX_FLOAT_DIGITS;
+		const int ROUNDING_DIGITS = FLOAT_PRECISION;
 	public:
 
 #pragma region PositionTester for TwoDCoordinate 
@@ -29,7 +29,7 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(actual.toString(), expected.toString());
 		}
 
 		TEST_CATEGORY(TestToEnsureMaxXRelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
@@ -43,7 +43,7 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(actual.toString(), expected.toString());
 		}
 
 		TEST_CATEGORY(TestToEnsureMaxYRelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
@@ -57,7 +57,7 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(actual.toString(), expected.toString());
 		}
 
 		TEST_CATEGORY(TestToEnsureMaxNegYRelativeIsCorrectInAbs, L"PositionTester - TwoDCoordinate")
@@ -71,7 +71,7 @@ namespace Tacticstests
 			TwoDCoordinate actual = relativeCoord.getAbsolutePosition(MaxX, MaxY);
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(actual.toString(ROUNDING_DIGITS), expected.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(actual.toString(), expected.toString());
 		}
 #pragma endregion PositionTester for TwoDCoordinate 
 

@@ -23,8 +23,13 @@
 // Returns:   
 // Qualifier:
 //************************************
-TwoDCoordinate::TwoDCoordinate()
+TwoDCoordinate::TwoDCoordinate() : Precision(FLOAT_PRECISION)
 {
+}
+
+TwoDCoordinate::TwoDCoordinate(float x, float y) : TwoDCoordinate(x, y, FLOAT_PRECISION)
+{
+
 }
 
 //************************************
@@ -36,7 +41,7 @@ TwoDCoordinate::TwoDCoordinate()
 // Parameter: float x
 // Parameter: float y
 //************************************
-TwoDCoordinate::TwoDCoordinate(float x, float y)
+TwoDCoordinate::TwoDCoordinate(float x, float y, int iFloatPrecision) : Precision(iFloatPrecision)
 {
 	_x = x;
 	_y = y;
@@ -50,10 +55,8 @@ TwoDCoordinate::TwoDCoordinate(float x, float y)
 // Qualifier:
 // Parameter: const TwoDCoordinate & obj
 //************************************
-TwoDCoordinate::TwoDCoordinate(const TwoDCoordinate & obj)
+TwoDCoordinate::TwoDCoordinate(const TwoDCoordinate & obj, int iFloatPrecision) : TwoDCoordinate(obj.getX(), obj.getY(), iFloatPrecision)
 {
-	_x = obj.getX();
-	_y = obj.getY();
 }
 
 //************************************
@@ -258,11 +261,11 @@ TwoDCoordinate& TwoDCoordinate::operator+=(const TwoDCoordinate & Ref)
 	return *this;
 }
 
-std::wstring TwoDCoordinate::toString(int rounding_digits) const
+std::wstring TwoDCoordinate::toString() const 
 {
 	std::wostringstream oss;
 	oss << std::fixed << std::showpoint;
-	oss << std::setprecision(rounding_digits);
+	oss << std::setprecision(0);
 	oss << _x;
 	oss << L", ";
 	oss << _y;

@@ -11,19 +11,21 @@ namespace Tacticstests
 	TEST_CLASS(ThreeDCoordinateTests), public BaseTester
 	{
 	private:
-		const int ROUNDING_DIGITS = MAX_FLOAT_DIGITS;
-
+		static int GetPrecision()
+		{
+			return 4;
+		}
 	public:
-		
+
 		TEST_CATEGORY(TestToCheckForStringVersion, L"ThreeDCoordinateTests")
 		TEST_METHOD(TestToCheckForStringVersion)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 10.0F, 34000.00F, GetPrecision());
 			std::wstring expected = L"90.0000° at 10.0000 units -> Angels 34";
 
 			// ACT
-			std::wstring strVersion = testCoord.toString(ROUNDING_DIGITS);
+			std::wstring strVersion = testCoord.toString();
 
 			// ASSERT
 			AssertOnActualNotEqualToExpected(expected, strVersion);
@@ -34,7 +36,7 @@ namespace Tacticstests
 		TEST_METHOD(TestDetrminationOfAngels)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 10.0F, 34000.00F, GetPrecision());
 			std::wstring expected = L"Angels 34";
 
 			// ACT
@@ -48,14 +50,14 @@ namespace Tacticstests
 		TEST_METHOD(TestPositiveBearingChange)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 34000.00F);
-			ThreeDCoordinate expected = ThreeDCoordinate(PolarCoordinate(100.00F, 10.00F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 10.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate expected = ThreeDCoordinate(100.00F, 10.00F, 34000.00F, GetPrecision());
 
 			// ACT
-			testCoord += ThreeDCoordinate(PolarCoordinate(10.00F, 0.00F), 0.00F);
+			testCoord += ThreeDCoordinate(10.00F, 0.00F, 0.00F, GetPrecision());
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), testCoord.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), testCoord.toString());
 
 		}
 
@@ -63,14 +65,14 @@ namespace Tacticstests
 		TEST_METHOD(TestNegativeBearingChange)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(135.0F, 10.0F), 34000.00F);
-			ThreeDCoordinate expected = ThreeDCoordinate(PolarCoordinate(100.00F, 10.00F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(35.0F, 10.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate expected = ThreeDCoordinate(0.00F, 10.00F, 34000.00F, GetPrecision());
 
 			// ACT
-			testCoord -= ThreeDCoordinate(PolarCoordinate(35.00F, 0.00F), 0.00F);
+			testCoord -= ThreeDCoordinate(35.00F, 0.00F, 0.00F, GetPrecision());
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), testCoord.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), testCoord.toString());
 
 		}
 
@@ -78,78 +80,78 @@ namespace Tacticstests
 		TEST_METHOD(TestPositiveRangeChange)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 34000.00F);
-			ThreeDCoordinate expected = ThreeDCoordinate(PolarCoordinate(90.00F, 50.00F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 10.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate expected = ThreeDCoordinate(90.00F, 50.00F, 34000.00F, GetPrecision());
 
 			// ACT
-			testCoord += ThreeDCoordinate(PolarCoordinate(0.00F, 40.00F), 0.00F);
+			testCoord += ThreeDCoordinate(0.00F, 40.00F, 0.00F, GetPrecision());
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), testCoord.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), testCoord.toString());
 		}
 
 		TEST_CATEGORY(TestNegativeRangeChange, L"ThreeDCoordinateTests")
 		TEST_METHOD(TestNegativeRangeChange)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 50.0F), 34000.00F);
-			ThreeDCoordinate expected = ThreeDCoordinate(PolarCoordinate(90.00F, 10.00F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 50.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate expected = ThreeDCoordinate(90.00F, 10.00F, 34000.00F, GetPrecision());
 
 			// ACT
-			testCoord -= ThreeDCoordinate(PolarCoordinate(0.00F, 40.00F), 0.00F);
+			testCoord -= ThreeDCoordinate(0.00F, 40.00F, 0.00F, GetPrecision());
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), testCoord.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), testCoord.toString());
 		}
 
 		TEST_CATEGORY(TestPositiveAltitudeChange, L"ThreeDCoordinateTests")
 		TEST_METHOD(TestPositiveAltitudeChange)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 34000.00F);
-			ThreeDCoordinate expected = ThreeDCoordinate(PolarCoordinate(90.00F, 10.00F), 41000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 10.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate expected = ThreeDCoordinate(90.00F, 10.00F, 41000.00F, GetPrecision());
 
 			// ACT
-			testCoord += ThreeDCoordinate(PolarCoordinate(0.00F, 0.00F), 7000.00F);
+			testCoord += ThreeDCoordinate(0.00F, 0.00F, 7000.00F, GetPrecision());
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), testCoord.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), testCoord.toString());
 		}
 
 		TEST_CATEGORY(TestNegativeAltitudeChange, L"ThreeDCoordinateTests")
 		TEST_METHOD(TestNegativeAltitudeChange)
 		{
 			// ARRANGE
-			ThreeDCoordinate testCoord = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 41000.00F);
-			ThreeDCoordinate expected = ThreeDCoordinate(PolarCoordinate(90.00F, 10.00F), 34000.00F);
+			ThreeDCoordinate testCoord = ThreeDCoordinate(90.0F, 10.0F, 41000.00F, GetPrecision());
+			ThreeDCoordinate expected = ThreeDCoordinate(90.00F, 10.00F, 34000.00F, GetPrecision());
 
 			// ACT
-			testCoord -= ThreeDCoordinate(PolarCoordinate(0.00F, 0.00F), 7000.00F);
+			testCoord -= ThreeDCoordinate(0.00F, 0.00F, 7000.00F, GetPrecision());
 
 			// ASSERT
-			AssertOnActualNotEqualToExpected(expected.toString(ROUNDING_DIGITS), testCoord.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(expected.toString(), testCoord.toString());
 		}
 
 		TEST_CATEGORY(TestEqualityEqual, L"ThreeDCoordinateTests")
 		TEST_METHOD(TestEqualityEqual)
 		{
 			// ARRANGE
-			ThreeDCoordinate first = ThreeDCoordinate(PolarCoordinate(90.0F, 10.0F), 34000.00F);
-			ThreeDCoordinate second = ThreeDCoordinate(PolarCoordinate(90.00F, 10.00F), 34000.00F);
+			ThreeDCoordinate first = ThreeDCoordinate(90.0F, 10.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate second = ThreeDCoordinate(90.00F, 10.00F, 34000.00F, GetPrecision());
 
 			// ACT and ASSERT
-			AssertOnActualNotEqualToExpected(first.toString(ROUNDING_DIGITS), second.toString(ROUNDING_DIGITS));
+			AssertOnActualNotEqualToExpected(first.toString(), second.toString());
 		}
 
 		TEST_CATEGORY(TestEqualityNotEqual, L"ThreeDCoordinateTests")
 		TEST_METHOD(TestEqualityNotEqual)
 		{
 			// ARRANGE
-			ThreeDCoordinate first = ThreeDCoordinate(PolarCoordinate(90.0000499F, 10.0F), 34000.00F);
-			ThreeDCoordinate second = ThreeDCoordinate(PolarCoordinate(90.00F, 10.00F), 34000.00F);
+			ThreeDCoordinate first = ThreeDCoordinate(90.0000499F, 10.0F, 34000.00F, GetPrecision());
+			ThreeDCoordinate second = ThreeDCoordinate(90.00F, 10.00F, 34000.00F, GetPrecision());
 
 			// ACT and ASSERT
-			AssertOnActualEqualToExpected(first.toString(ROUNDING_DIGITS), second.toString(ROUNDING_DIGITS));
+			AssertOnActualEqualToExpected(first.toString(), second.toString());
 		}
 
 	};
