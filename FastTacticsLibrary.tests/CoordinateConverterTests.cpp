@@ -72,7 +72,8 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(.866F, .5F);
-			PolarCoordinate expected = PolarCoordinate(59.9993F, 1.0F);
+			TwoDCoordinate expectedTestPoint = TwoDCoordinate(0.865999997F, 0.499999970F);
+			PolarCoordinate expected = PolarCoordinate(59.9992752F, 0.999978006F);
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
@@ -80,7 +81,7 @@ namespace Tacticstests
 
 			// ASSERT
 			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
-			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
+			AssertOnActualNotEqualToExpected(expectedTestPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor75Degrees, L"Quadrant I")
@@ -141,7 +142,8 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(.866F, -.5F);
-			PolarCoordinate expected = PolarCoordinate(120.0007F, 1.000F);
+			TwoDCoordinate expectedTestPoint = TwoDCoordinate(0.865999997F , -0.499999970F);
+			PolarCoordinate expected = PolarCoordinate(120.000725F, 0.999978006F);
 
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
@@ -149,7 +151,7 @@ namespace Tacticstests
 
 			// ASSERT
 			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
-			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
+			AssertOnActualNotEqualToExpected(expectedTestPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor135Degrees, L"Quadrant IV")
@@ -382,7 +384,8 @@ namespace Tacticstests
 		{
 			// ARRANGE
 			TwoDCoordinate testPoint = TwoDCoordinate(-.5F, .866F);
-			PolarCoordinate expected = PolarCoordinate(329.9993F, 1.000F);
+			TwoDCoordinate expectedTestPoint = TwoDCoordinate(-0.499999970F, 0.865999997F);
+			PolarCoordinate expected = PolarCoordinate(329.999268F, 0.999978006F);
 			
 			// ACT
 			PolarCoordinate actual = CoordinateConverter::ConvertFrom2DToPolar(testPoint);
@@ -390,7 +393,7 @@ namespace Tacticstests
 
 			// ASSERT
 			AssertOnActualNotEqualToExpected(expected.toString(), actual.toString());
-			AssertOnActualNotEqualToExpected(testPoint.toString(), convertedPoint.toString());
+			AssertOnActualNotEqualToExpected(expectedTestPoint.toString(), convertedPoint.toString());
 		}
 
 		TEST_CATEGORY(Testfor345Degrees, L"Quadrant II")

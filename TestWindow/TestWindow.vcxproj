@@ -174,14 +174,14 @@
     <Image Include="TestWindow.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FastTacticsLibrary\FastTacticsLibrary.vcxproj">
-      <Project>{0a5abe0d-650d-4aa5-98ba-aada32165099}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FastTacticsLibrary\FastTacticsLibrary.vcxproj">
+      <Project>{0a5abe0d-650d-4aa5-98ba-aada32165099}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

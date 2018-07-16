@@ -51,6 +51,11 @@ void ContactProcessor::RemoveContact(int index)
 //************************************
 map<int, Contact> ContactProcessor::ProcessAndReturnMap()
 {
+	if(contactMap.size() == 0)
+	{
+		return contactMap;
+	}
+
 	int randNum = GetRandomNumber(0, contactMap.size() - 1);
 	std::map<int, Contact>::iterator it = contactMap.begin();
 	while (it != contactMap.end())
